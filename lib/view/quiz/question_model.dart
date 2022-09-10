@@ -7,7 +7,7 @@ class QuestionModel {
   String? category;
   String? id;
   String? correctAnswer;
-  List<String>? incorrectAnswers;
+  List<dynamic>? incorrectAnswers;
   String? question;
   String? difficulty;
 

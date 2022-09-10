@@ -11,9 +11,7 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) =>
       category: json['category'] as String?,
       id: json['id'] as String?,
       correctAnswer: json['correctAnswer'] as String?,
-      incorrectAnswers: (json['incorrectAnswers'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      incorrectAnswers: json['incorrectAnswers'] as List<dynamic>?,
       question: json['question'] as String?,
       difficulty: json['difficulty'] as String?,
     );
