@@ -33,18 +33,45 @@ class _TestWidgetScreenState extends State<TestWidgetScreen> {
               child: CircularProgressIndicator(),
             );
           }
-          return ListView.builder(
-            itemCount: value.questions.length,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Text(index.toString()),
-                  Text(value.questions[index].question.toString()),
-                  Text(value.questions[index].incorrectAnswers.toString()),
-                  Text(value.questions[index].correctAnswer.toString()),
-                ],
-              );
-            },
+          return Column(
+            children: [
+              Expanded(
+                flex: 9,
+                child: ListView.builder(
+                  itemCount: value.datas.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Text(index.toString()),
+                        const Divider(),
+                        Text(value.datas[index].question.toString()),
+                        const Divider(),
+                        Text(value.datas[index].correctAnswer.toString()),
+                        const Divider(),
+                        Text(value.currentModel().correctAnswer.toString()),
+                        const Divider(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (value.questionIndex < value.datas.length - 1) {
+                      value.incrementQuestionIndex();
+                      debugPrint("test index ${value.questionIndex}");
+                    } else {
+                      value.clearQuestionIndex();
+                      debugPrint("test index ${value.questionIndex}");
+                      Navigator.pushNamed(context, 'score');
+                    }
+                  },
+                  child: const Text("click"),
+                ),
+              )
+            ],
           );
         },
       ),

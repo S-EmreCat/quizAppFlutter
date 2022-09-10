@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'service_constants.dart';
+import '../constants/service_constants.dart';
 
 import '../../view/quiz/question_model.dart';
 import 'package:http/http.dart' as http;

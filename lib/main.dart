@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quizapp/view/score/score_screen.dart';
 
 import 'core/initial/splash/splash_screen.dart';
 import 'test_widget.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         routes: {
           'test': (context) => const TestWidgetScreen(),
           'splash': (context) => const Splash(),
-          'question': ((context) => const QuestionsScreen())
+          'question': (context) => const QuestionsScreen(),
+          'score': (context) => const ScoreScreen(),
         },
       ),
     );
