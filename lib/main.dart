@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<LoginViewModel>(create: (_) => LoginViewModel()),
-        Provider<QuestionProvider>(create: (_) => QuestionProvider()),
+        ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider<QuestionProvider>(
+            create: (_) => QuestionProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData.dark(),

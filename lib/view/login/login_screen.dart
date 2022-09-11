@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/core/constants/padding.dart';
-import 'package:quizapp/core/constants/string.dart';
-import 'package:quizapp/view/login/login_viewmodel.dart';
+import '../../core/constants/padding.dart';
+import '../../core/constants/string.dart';
+import 'login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () {
         loginProvider.getNickName(_controller.text);
         debugPrint(loginProvider.nickName);
-        Navigator.pushNamed(context, 'question');
+        Navigator.pushNamed(context, 'test');
         debugPrint(_controller.text);
       },
       child: Container(

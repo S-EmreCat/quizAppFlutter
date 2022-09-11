@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/view/login/login_viewmodel.dart';
+import 'view/login/login_viewmodel.dart';
 import 'view/quiz/question_viewmodel.dart';
 
 class TestWidgetScreen extends StatefulWidget {

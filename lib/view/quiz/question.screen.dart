@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/view/login/login_viewmodel.dart';
+import '../login/login_viewmodel.dart';
 
 import 'question_viewmodel.dart';
 
