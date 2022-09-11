@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/view/quiz/question_viewmodel.dart';
+import 'package:quizapp/view/login/login_viewmodel.dart';
+import 'view/quiz/question_viewmodel.dart';
 
 class TestWidgetScreen extends StatefulWidget {
   const TestWidgetScreen({super.key});
@@ -12,11 +13,16 @@ class TestWidgetScreen extends StatefulWidget {
 class _TestWidgetScreenState extends State<TestWidgetScreen> {
   late final QuestionProvider dataProvider =
       Provider.of<QuestionProvider>(context, listen: false);
+  late final LoginViewModel loginProvider =
+      Provider.of<LoginViewModel>(context, listen: false);
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<QuestionProvider>(context, listen: false).fetchAllQuestions();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<LoginViewModel>(context, listen: false);
     });
   }
 
@@ -50,6 +56,12 @@ class _TestWidgetScreenState extends State<TestWidgetScreen> {
                         const Divider(),
                         Text(value.currentModel().correctAnswer.toString()),
                         const Divider(),
+                        Text(dataProvider.datas[index].correctAnswer!),
+                        Consumer<LoginViewModel>(
+                          builder: (context, value, child) {
+                            return Text(loginProvider.nickName ?? "Null");
+                          },
+                        ),
                       ],
                     );
                   },

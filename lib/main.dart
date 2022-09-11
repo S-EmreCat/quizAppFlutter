@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizapp/view/score/score_screen.dart';
+import 'view/login/login_screen.dart';
+import 'view/login/login_viewmodel.dart';
+import 'view/score/score_screen.dart';
 
 import 'core/initial/splash/splash_screen.dart';
 import 'test_widget.dart';
@@ -15,23 +17,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => QuestionProvider(),
+    return MultiProvider(
+      providers: [
+        Provider<LoginViewModel>(create: (_) => LoginViewModel()),
+        Provider<QuestionProvider>(create: (_) => QuestionProvider()),
+      ],
       child: MaterialApp(
-        // theme: ThemeData(
-        //   appBarTheme: const AppBarTheme()
-        //       .copyWith(backgroundColor: Colors.transparent, elevation: 0),
-        // ),
+        theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: 'Material App',
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const Undefined()),
-        initialRoute: 'test',
+        initialRoute: 'splash',
         routes: {
+          'undefined': (context) => const Undefined(),
           'test': (context) => const TestWidgetScreen(),
           'splash': (context) => const Splash(),
           'question': (context) => const QuestionsScreen(),
           'score': (context) => const ScoreScreen(),
+          'login': (context) => const LoginScreen(),
         },
       ),
     );
