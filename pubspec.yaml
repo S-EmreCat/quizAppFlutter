@@ -74,7 +74,6 @@ flutter:
   assets:
     - assets/bg.jpg
     - assets/clock.png
-    - assets/blue.jpg
     - assets/purplebg.jpg
     
 

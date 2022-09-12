@@ -1,7 +1,8 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/constants/padding.dart';
+import 'package:quizapp/core/constants/padding.dart';
+import '../../core/constants/radius.dart';
 import '../login/login_viewmodel.dart';
 
 import 'question_viewmodel.dart';
@@ -37,8 +38,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          const Image(
-              fit: BoxFit.fill, image: AssetImage('assets/purplebg.jpg')),
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(RadiusConstants.yirmi),
+            ),
+            child: const Image(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/purplebg.jpg'),
+            ),
+          ),
           SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -50,26 +58,58 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   },
                   icon: const Icon(Icons.arrow_back_outlined),
                 ),
-                Padding(
-                  padding: const PagePaddings.vertical10(),
-                  child: Center(
-                    child: timerWidget(widthPage, heightPage),
-                  ),
+                Center(
+                  child: timerWidget(widthPage, heightPage),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 0),
-                  child: Center(
-                    child: Container(
-                      height: heightPage / 3,
-                      width: widthPage / 1.2,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.rectangle,
+                Center(
+                  child: Container(
+                    height: heightPage / 3,
+                    width: widthPage / 1.2,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(RadiusConstants.yirmi),
+                      ),
+                    ),
+                    child: Card(
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                          Radius.circular(RadiusConstants.yirmi),
                         ),
                       ),
-                      child: const Card(
-                        child: Text("data"),
+                      child: Padding(
+                        padding: const PagePaddings.all15(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Question 2/10",
+                                style: Theme.of(context).textTheme.subtitle1),
+                            Text(
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                "datadatadatadatadatadatadata data data data datada data datada",
+                                style: Theme.of(context).textTheme.headline6),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const PagePaddings.all15(),
+                    child: Container(
+                      color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          testWidget(context),
+                          testWidget(context),
+                          testWidget(context),
+                          testWidget(context),
+                        ],
                       ),
                     ),
                   ),
@@ -78,6 +118,37 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  GestureDetector testWidget(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+        alignment: Alignment.center,
+        height: 50,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(1, 3),
+              blurRadius: 3,
+              color: Colors.black.withOpacity(0.3),
+            ),
+          ],
+        ),
+        child: const Text(
+          "option",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.pink,
+          ),
+        ),
       ),
     );
   }

@@ -19,14 +19,37 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider<LoginViewModel>(
+          create: (_) => LoginViewModel(),
+        ),
         ChangeNotifierProvider<QuestionProvider>(
-            create: (_) => QuestionProvider()),
+          create: (_) => QuestionProvider(),
+        ),
       ],
       child: MaterialApp(
-        theme: ThemeData.dark(),
+        // Theme
+        theme: ThemeData.dark().copyWith(
+          // Card Theme
+          cardTheme: const CardTheme(color: Colors.white),
+
+          //Text Theme
+          textTheme: const TextTheme(
+            headline6:
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            subtitle1: TextStyle(
+              color: Colors.purple,
+              fontWeight: FontWeight.bold,
+            ),
+            subtitle2: TextStyle(
+              color: Colors.purple,
+            ),
+          ),
+          primaryTextTheme: const TextTheme(),
+        ),
         debugShowCheckedModeBanner: false,
         title: 'Material App',
+
+        // Routing
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const Undefined()),
         initialRoute: 'question',
