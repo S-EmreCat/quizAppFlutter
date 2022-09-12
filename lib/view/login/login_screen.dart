@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/padding.dart';
 import '../../core/constants/string.dart';
 import 'login_viewmodel.dart';
@@ -28,34 +29,31 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          const Positioned.fill(
-            child: Image(
-              fit: BoxFit.fill,
-              image: AssetImage('assets/bg.jpg'),
-            ),
+          const Image(
+            fit: BoxFit.fill,
+            image: AssetImage('assets/bg.jpg'),
           ),
-          Center(
-            child: Padding(
-              padding: const PagePaddings.all15(),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Spacer(flex: 2),
-                  textPlayString(),
-                  Text(AppStringConstants.enterYourName),
-                  const Spacer(),
-                  Consumer(
-                    builder: (context, value, child) {
-                      return tFieldNickName();
-                    },
-                  ),
-                  const Spacer(),
-                  goToQuizPageButton(context),
-                  const Spacer(flex: 1),
-                ],
-              ),
+          Padding(
+            padding: const PagePaddings.all15(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Spacer(flex: 2),
+                textPlayString(),
+                Text(AppStringConstants.enterYourName),
+                const Spacer(),
+                Consumer(
+                  builder: (context, value, child) {
+                    return tFieldNickName();
+                  },
+                ),
+                const Spacer(),
+                goToQuizPageButton(context),
+                const Spacer(flex: 1),
+              ],
             ),
           )
         ],
@@ -91,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () {
         loginProvider.getNickName(_controller.text);
         debugPrint(loginProvider.nickName);
-        Navigator.pushNamed(context, 'test');
+        Navigator.pushNamed(context, 'question');
         debugPrint(_controller.text);
       },
       child: Container(

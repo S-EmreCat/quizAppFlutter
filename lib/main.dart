@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'Material App',
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const Undefined()),
-        initialRoute: 'splash',
+        initialRoute: 'question',
         routes: {
           'undefined': (context) => const Undefined(),
           'test': (context) => const TestWidgetScreen(),

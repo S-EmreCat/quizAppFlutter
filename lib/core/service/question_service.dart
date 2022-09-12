@@ -1,9 +1,7 @@
 import 'dart:convert';
-
-import '../constants/service_constants.dart';
-
-import '../../view/quiz/question_model.dart';
 import 'package:http/http.dart' as http;
+import '../../view/quiz/question_model.dart';
+import '../constants/service_constants.dart';
 
 class QuestionServiceManager {
   Future<List<QuestionModel>> fetchAll() async {

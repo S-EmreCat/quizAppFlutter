@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../core/service/question_service.dart';
 import 'question_model.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class QuestionProvider extends ChangeNotifier {
   final _service = QuestionServiceManager();
@@ -12,6 +14,10 @@ class QuestionProvider extends ChangeNotifier {
   List<dynamic>? inCorrectAnswers;
   int questionIndex = 0;
 
+  final int timerDuration = 10;
+  final CountDownController controller = CountDownController();
+
+// fetch all questions
   Future<void> fetchAllQuestions() async {
     isLoading = true;
     notifyListeners();
@@ -48,6 +54,7 @@ class QuestionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+//TODO: içerideki fonksiyonların notify larını kaldır. Burada sadece kullanmayı dene
   QuestionModel currentModel() {
     getQuestion(questionIndex);
     getCorrectAnswer(questionIndex);
