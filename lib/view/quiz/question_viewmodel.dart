@@ -1,8 +1,10 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/service/question_service.dart';
 import 'question_model.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+
+enum SingingCharacter { lafayette, jefferson }
 
 class QuestionProvider extends ChangeNotifier {
   final _service = QuestionServiceManager();
@@ -12,9 +14,10 @@ class QuestionProvider extends ChangeNotifier {
   String? currentQuestion;
   String? currentCorrectAnswer;
   List<dynamic>? inCorrectAnswers;
+  List<dynamic>? allAnswers = [];
   int questionIndex = 0;
 
-  final int timerDuration = 10;
+  final int timerDuration = 3;
   final CountDownController controller = CountDownController();
 
 // fetch all questions
@@ -25,15 +28,28 @@ class QuestionProvider extends ChangeNotifier {
     _datas = response;
     isLoading = false;
     notifyListeners();
-    debugPrint(response.length.toString());
-    debugPrint(response[0].question);
-    debugPrint('2 ${_datas[0].question}');
-    // _currentIncorrectAnswers = response[0].incorrectAnswers;
-    // debugPrint(_currentIncorrectAnswers.toString());
+  }
+
+  void testFun() {
+    debugPrint("test fun");
+    if ((questionIndex < 2 &&
+        controller.getTime() == timerDuration.toString())) {
+      incrementQuestionIndex();
+      controller.restart();
+    }
+    if (questionIndex == 2) {
+      controller.reset();
+      // TODO : question option kısmı yapıldıktan sonra yorumdan çıkarılacak > score page
+
+      // SchedulerBinding.instance.addPostFrameCallback((_) {
+      //   Navigator.pushReplacementNamed(context, 'score');
+      // });
+    }
   }
 
   void getQuestion(questionIndex) {
     currentQuestion = _datas[questionIndex].question;
+    // notifyListeners();
   }
 
   void getCorrectAnswer(questionIndex) {
@@ -46,19 +62,21 @@ class QuestionProvider extends ChangeNotifier {
 
   void incrementQuestionIndex() {
     questionIndex++;
-    notifyListeners();
+    debugPrint('index:$questionIndex');
   }
 
   void clearQuestionIndex() {
     questionIndex = 0;
-    notifyListeners();
   }
 
-//TODO: içerideki fonksiyonların notify larını kaldır. Burada sadece kullanmayı dene
   QuestionModel currentModel() {
     getQuestion(questionIndex);
     getCorrectAnswer(questionIndex);
     getInCorrectAnswers(questionIndex);
+    allAnswers?.addAll(inCorrectAnswers!);
+    allAnswers?.add(currentCorrectAnswer!);
+    allAnswers!.shuffle();
+
     return QuestionModel(
         correctAnswer: currentCorrectAnswer,
         incorrectAnswers: inCorrectAnswers,

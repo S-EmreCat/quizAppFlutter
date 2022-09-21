@@ -31,11 +31,11 @@ class _TestWidgetScreenState extends State<TestWidgetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("quiz screen"),
+        title: const Text("test screen"),
       ),
       body: Consumer<QuestionProvider>(
-        builder: (context, value, child) {
-          if (value.isLoading) {
+        builder: (context, dataProvider, child) {
+          if (dataProvider.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -45,24 +45,40 @@ class _TestWidgetScreenState extends State<TestWidgetScreen> {
               Expanded(
                 flex: 9,
                 child: ListView.builder(
-                  itemCount: value.datas.length,
+                  itemCount: dataProvider.datas.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         Text(index.toString()),
                         const Divider(),
-                        Text(value.datas[index].question.toString()),
+                        Text(dataProvider.datas[index].question.toString()),
                         const Divider(),
-                        Text(value.datas[index].correctAnswer.toString()),
+
+                        Text(dataProvider
+                            .currentModel()
+                            .correctAnswer
+                            .toString()),
                         const Divider(),
-                        Text(value.currentModel().correctAnswer.toString()),
+                        Text(dataProvider
+                            .currentModel()
+                            .incorrectAnswers
+                            .toString()),
                         const Divider(),
-                        Text(dataProvider.datas[index].correctAnswer!),
-                        Consumer<LoginViewModel>(
-                          builder: (context, value, child) {
-                            return Text(loginProvider.nickName ?? "Null");
-                          },
-                        ),
+                        Text(dataProvider.allAnswers?[0] ?? ''),
+                        const Divider(),
+                        Text(dataProvider.allAnswers?[1] ?? ''),
+                        const Divider(),
+                        Text(dataProvider.allAnswers?[2] ?? ''),
+                        const Divider(),
+                        Text(dataProvider.allAnswers?[3] ?? ''),
+                        const Divider(),
+                        Text(dataProvider.allAnswers!.length.toString()),
+                        const Divider(),
+                        // Consumer<LoginViewModel>(
+                        //   builder: (context, dataProvider, child) {
+                        //     return Text(loginProvider.nickName ?? "Null");
+                        //   },
+                        // ),
                       ],
                     );
                   },
@@ -72,12 +88,15 @@ class _TestWidgetScreenState extends State<TestWidgetScreen> {
                 flex: 1,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (value.questionIndex < value.datas.length - 1) {
-                      value.incrementQuestionIndex();
-                      debugPrint("test index ${value.questionIndex}");
+                    // dataProvider.testFun();
+                    // Navigator.pushNamed(context, 'score');
+                    if (dataProvider.questionIndex <
+                        dataProvider.datas.length - 1) {
+                      dataProvider.incrementQuestionIndex();
+                      debugPrint("test index ${dataProvider.questionIndex}");
                     } else {
-                      value.clearQuestionIndex();
-                      debugPrint("test index ${value.questionIndex}");
+                      dataProvider.clearQuestionIndex();
+                      debugPrint("test index ${dataProvider.questionIndex}");
                       Navigator.pushNamed(context, 'score');
                     }
                   },

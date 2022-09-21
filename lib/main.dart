@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'view/login/login_screen.dart';
-import 'view/login/login_viewmodel.dart';
-import 'view/score/score_screen.dart';
 
 import 'core/initial/splash/splash_screen.dart';
 import 'test_widget.dart';
+import 'view/login/login_screen.dart';
+import 'view/login/login_viewmodel.dart';
 import 'view/quiz/question.screen.dart';
 import 'view/quiz/question_viewmodel.dart';
+import 'view/score/score_screen.dart';
 import 'view/undefined/undefined.dart';
 
 void main() => runApp(const MyApp());
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         // Routing
         onUnknownRoute: (settings) =>
             MaterialPageRoute(builder: (context) => const Undefined()),
-        initialRoute: 'question',
+        initialRoute: 'test',
         routes: {
           'undefined': (context) => const Undefined(),
           'test': (context) => const TestWidgetScreen(),
